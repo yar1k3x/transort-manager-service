@@ -54,6 +54,7 @@ func (s *server) UpdateTransport(ctx context.Context, in *pb.UpdateTransportRequ
 	}, nil
 
 }
+
 func (s *server) GetTransportInfo(ctx context.Context, in *pb.GetTransportInfoRequest) (*pb.GetTransportInfoResponse, error) {
 	log.Printf("Получен запрос от пользователя на получение инфы о транспорте")
 
@@ -66,6 +67,40 @@ func (s *server) GetTransportInfo(ctx context.Context, in *pb.GetTransportInfoRe
 
 	return &pb.GetTransportInfoResponse{
 		Transports: transport,
+	}, nil
+}
+
+func (s *server) CreateTransportLog(ctx context.Context, in *pb.CreateTransportLogRequest) (*pb.CreateTransportLogResponse, error) {
+	log.Printf("Получен запрос от пользователя на создание транспортного ТО")
+
+	requestID, err := db.CreateTransportLogRequest(in)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "ошибка записи в базу данных: %v", err)
+	}
+
+	log.Printf("Заявка успешно создана с ID %d", requestID)
+
+	return &pb.CreateTransportLogResponse{
+		Success: true,
+	}, nil
+}
+
+func (s *server) GetTransportLogsInfo(ctx context.Context, in *pb.GetTransportLogsInfoRequest) (*pb.GetTransportLogsInfoResponse, error) {
+	if in.TransportId != nil {
+		log.Printf("Получен запрос от пользователя на получение инфы о транспортном ТО (#%d):", in.TransportId.Value)
+	} else {
+		log.Printf("Получен запрос от пользователя на получение всех транспортных ТО")
+	}
+
+	transportLogs, err := db.GetTransportLogsRequest(in)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "Ошибка при получении заявки: %v", err)
+	}
+
+	log.Printf("Заявка успешно получена")
+
+	return &pb.GetTransportLogsInfoResponse{
+		TransportLogs: transportLogs,
 	}, nil
 }
 

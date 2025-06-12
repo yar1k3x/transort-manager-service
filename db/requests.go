@@ -4,7 +4,7 @@ import (
 	"TransportManagementService/proto"
 	"fmt"
 	"strings"
-	// "time"
+	"time"
 )
 
 func CreateTransportRequest(input *proto.CreateTransportRequest) (int64, error) {
@@ -156,4 +156,95 @@ func GetTransportRequest(input *proto.GetTransportInfoRequest) ([]*proto.Transpo
 	}
 
 	return transports, nil
+}
+
+func CreateTransportLogRequest(input *proto.CreateTransportLogRequest) (int64, error) {
+	stmt, err := DB.Prepare(`
+        INSERT INTO transport_logs (
+            transport_id, service_type_id, description, service_date, mileage
+        ) VALUES (?, ?, ?, ?, ?)
+    `)
+	if err != nil {
+		return 0, err
+	}
+	defer stmt.Close()
+
+	res, err := stmt.Exec(
+		input.TransportId,
+		input.ServiceTypeId,
+		input.Description,
+		input.ServiceDate,
+		input.Mileage,
+	)
+	if err != nil {
+		return 0, err
+	}
+
+	return res.LastInsertId()
+}
+
+func GetTransportLogsRequest(input *proto.GetTransportLogsInfoRequest) ([]*proto.TransportLogInfo, error) {
+	baseQuery := `
+		SELECT
+			tl.id,
+			tl.transport_id,
+			st.name AS service_type,
+			tl.description,
+			tl.mileage,
+			tl.service_date
+		FROM transport_logs tl
+		JOIN service_type st ON tl.service_type_id = st.id
+    `
+
+	var args []interface{}
+	var conditions []string
+
+	if input.TransportId != nil {
+		conditions = append(conditions, "tl.transport_id = ?")
+		args = append(args, input.TransportId.Value)
+	}
+
+	if len(conditions) > 0 {
+		baseQuery += " WHERE " + conditions[0]
+		for i := 1; i < len(conditions); i++ {
+			baseQuery += " AND " + conditions[i]
+		}
+	}
+
+	rows, err := DB.Query(baseQuery, args...)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var transportLogs []*proto.TransportLogInfo
+
+	for rows.Next() {
+		var r proto.TransportLogInfo
+		var serviceDate time.Time
+
+		err := rows.Scan(
+			&r.Id,
+			&r.TransportId,
+			&r.ServiceType,
+			&r.Description,
+			&r.Mileage,
+			&serviceDate,
+			//&createdAt,
+		)
+		if err != nil {
+			return nil, err
+		}
+
+		r.ServiceDate = serviceDate.Format(time.RFC3339)
+		// r.CreatedAt = createdAt.Format(time.RFC3339)
+
+		transportLogs = append(transportLogs, &r)
+	}
+
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return transportLogs, nil
 }

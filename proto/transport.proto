@@ -10,7 +10,8 @@ service TransportService {
   rpc CreateTransport (CreateTransportRequest) returns (CreateTransportResponse);
   rpc UpdateTransport (UpdateTransportRequest) returns (UpdateTransportResponse);
   rpc GetTransportInfo (GetTransportInfoRequest) returns (GetTransportInfoResponse);
-  // rpc GetTransportLogsInfo (GetTransportLogsInfoRequest) returns (GetTransportLogsInfoResponse);
+  rpc CreateTransportLog (CreateTransportLogRequest) returns (CreateTransportLogResponse);
+  rpc GetTransportLogsInfo (GetTransportLogsInfoRequest) returns (GetTransportLogsInfoResponse);
 }
 
 message CreateTransportRequest {
@@ -27,7 +28,6 @@ message CreateTransportResponse {
 
 message UpdateTransportRequest {
   google.protobuf.Int32Value transport_id = 1;
-  //int32 is_active = 2;
   google.protobuf.Int32Value is_active = 2;
   google.protobuf.Int32Value current_driver_id = 3;
 }
@@ -53,10 +53,33 @@ message TransportInfo {
   int32 is_active = 4;
   int32 current_driver_id = 5;
 }
-// message GetTransportLogsInfoRequest {
-//   int32 transport_id = 1;
-// }
 
-// message GetTransportLogsInfoResponse {
-//   bool success = 1;
-// }
+message CreateTransportLogRequest {
+  int32 id = 1;
+  int32 transport_id = 2;
+  int32 service_type_id = 3;
+  string service_date = 4;
+  int32 description = 5;
+  int32 mileage = 6;
+}
+
+message CreateTransportLogResponse {
+  bool success = 1;
+}
+
+message TransportLogInfo {
+  int32 id = 1;
+  int32 transport_id = 2;
+  string service_type = 3;
+  string description = 4;
+  int32 mileage = 5;
+  string service_date = 6;
+}
+
+message GetTransportLogsInfoRequest {
+  google.protobuf.Int32Value transport_id = 1;
+}
+
+message GetTransportLogsInfoResponse {
+  repeated TransportLogInfo transport_logs = 1;
+}
