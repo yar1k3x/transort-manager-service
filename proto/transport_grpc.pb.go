@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	TransportService_CreateTransport_FullMethodName = "/proto.TransportService/CreateTransport"
+	TransportService_UpdateTransport_FullMethodName = "/proto.TransportService/UpdateTransport"
 )
 
 // TransportServiceClient is the client API for TransportService service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TransportServiceClient interface {
 	CreateTransport(ctx context.Context, in *CreateTransportRequest, opts ...grpc.CallOption) (*CreateTransportResponse, error)
+	UpdateTransport(ctx context.Context, in *UpdateTransportRequest, opts ...grpc.CallOption) (*UpdateTransportResponse, error)
 }
 
 type transportServiceClient struct {
@@ -47,11 +49,22 @@ func (c *transportServiceClient) CreateTransport(ctx context.Context, in *Create
 	return out, nil
 }
 
+func (c *transportServiceClient) UpdateTransport(ctx context.Context, in *UpdateTransportRequest, opts ...grpc.CallOption) (*UpdateTransportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateTransportResponse)
+	err := c.cc.Invoke(ctx, TransportService_UpdateTransport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TransportServiceServer is the server API for TransportService service.
 // All implementations must embed UnimplementedTransportServiceServer
 // for forward compatibility.
 type TransportServiceServer interface {
 	CreateTransport(context.Context, *CreateTransportRequest) (*CreateTransportResponse, error)
+	UpdateTransport(context.Context, *UpdateTransportRequest) (*UpdateTransportResponse, error)
 	mustEmbedUnimplementedTransportServiceServer()
 }
 
@@ -64,6 +77,9 @@ type UnimplementedTransportServiceServer struct{}
 
 func (UnimplementedTransportServiceServer) CreateTransport(context.Context, *CreateTransportRequest) (*CreateTransportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateTransport not implemented")
+}
+func (UnimplementedTransportServiceServer) UpdateTransport(context.Context, *UpdateTransportRequest) (*UpdateTransportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTransport not implemented")
 }
 func (UnimplementedTransportServiceServer) mustEmbedUnimplementedTransportServiceServer() {}
 func (UnimplementedTransportServiceServer) testEmbeddedByValue()                          {}
@@ -104,6 +120,24 @@ func _TransportService_CreateTransport_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TransportService_UpdateTransport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTransportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TransportServiceServer).UpdateTransport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TransportService_UpdateTransport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TransportServiceServer).UpdateTransport(ctx, req.(*UpdateTransportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TransportService_ServiceDesc is the grpc.ServiceDesc for TransportService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +148,10 @@ var TransportService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateTransport",
 			Handler:    _TransportService_CreateTransport_Handler,
+		},
+		{
+			MethodName: "UpdateTransport",
+			Handler:    _TransportService_UpdateTransport_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -22,11 +22,6 @@ type server struct {
 func (s *server) CreateTransport(ctx context.Context, in *pb.CreateTransportRequest) (*pb.CreateTransportResponse, error) {
 	log.Printf("Получен запрос от пользователя на создание транспорта")
 
-	// if err := in.Validate(); err != nil {
-	// 	return nil, status.Errorf(codes.InvalidArgument, "ошибка валидации: %v", err)
-	// }
-
-	// Вставка в БД
 	requestID, err := db.CreateTransportRequest(in)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "ошибка записи в базу данных: %v", err)
@@ -38,6 +33,26 @@ func (s *server) CreateTransport(ctx context.Context, in *pb.CreateTransportRequ
 		Success:     true,
 		TransportId: requestID,
 	}, nil
+}
+
+func (s *server) UpdateTransport(ctx context.Context, in *pb.UpdateTransportRequest) (*pb.UpdateTransportResponse, error) {
+	log.Printf("Получен запрос от пользователя на обновление инфы о транспорте")
+	if in.TransportId == nil {
+		log.Printf("Ошибка: Получен запрос от пользователя с пустым TransportId")
+		return nil, status.Errorf(codes.InvalidArgument, "TransportId не может быть пустым")
+	}
+
+	success, err := db.UpdateTransportRequest(in)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "Ошибка при обновлении заявки: %v", err)
+	}
+
+	log.Printf("Заявка успешно обновлена")
+
+	return &pb.UpdateTransportResponse{
+		Success: success,
+	}, nil
+
 }
 
 func Start() {

@@ -2,8 +2,8 @@ package db
 
 import (
 	"TransportManagementService/proto"
-	// "fmt"
-	// "strings"
+	"fmt"
+	"strings"
 	// "time"
 )
 
@@ -29,6 +29,59 @@ func CreateTransportRequest(input *proto.CreateTransportRequest) (int64, error) 
 	}
 
 	return res.LastInsertId()
+}
+
+func UpdateTransportRequest(input *proto.UpdateTransportRequest) (bool, error) {
+	tx, err := DB.Begin()
+	if err != nil {
+		return false, err
+	}
+	defer func() {
+		if err != nil {
+			tx.Rollback()
+		}
+	}()
+
+	var fields []string
+	var args []interface{}
+
+	if input.CurrentDriverId != nil {
+		fields = append(fields, "current_driver_id = ?")
+		args = append(args, input.CurrentDriverId.Value)
+	}
+	if input.IsActive != nil {
+		fields = append(fields, "is_active = ?")
+		args = append(args, input.IsActive.Value)
+	}
+
+	if len(fields) == 0 {
+		return false, fmt.Errorf("no fields to update")
+	}
+
+	query := fmt.Sprintf("UPDATE transports SET %s WHERE id = ?", strings.Join(fields, ", "))
+	args = append(args, input.TransportId.Value)
+
+	stmt, err := tx.Prepare(query)
+	if err != nil {
+		return false, err
+	}
+	defer stmt.Close()
+
+	res, err := stmt.Exec(args...)
+	if err != nil {
+		return false, err
+	}
+
+	affected, err := res.RowsAffected()
+	if err != nil {
+		return false, err
+	}
+
+	if err := tx.Commit(); err != nil {
+		return false, fmt.Errorf("ошибка при коммите транзакции: %w", err)
+	}
+
+	return affected > 0, nil
 }
 
 // func GetDeliveryRequests(input *proto.GetRequestInput) ([]*proto.DeliveryRequest, error) {
@@ -97,109 +150,4 @@ func CreateTransportRequest(input *proto.CreateTransportRequest) (int64, error) 
 // 	}
 
 // 	return requests, nil
-// }
-// func UpdateDeliveryRequest(input *proto.UpdateRequestInput) (bool, error, bool) {
-// 	nsSend := false
-// 	if input.RequestId == nil {
-// 		return false, fmt.Errorf("request_id is required"), nsSend
-// 	}
-
-// 	var oldStatus int32
-// 	tx, err := DB.Begin()
-// 	if err != nil {
-// 		return false, err, nsSend
-// 	}
-// 	defer func() {
-// 		if err != nil {
-// 			tx.Rollback()
-// 		}
-// 	}()
-
-// 	var fields []string
-// 	var args []interface{}
-
-// 	if input.Weight != nil {
-// 		fields = append(fields, "weight = ?")
-// 		args = append(args, input.Weight.Value)
-// 	}
-// 	if input.FromLocation != nil {
-// 		fields = append(fields, "from_location = ?")
-// 		args = append(args, input.FromLocation.Value)
-// 	}
-// 	if input.ToLocation != nil {
-// 		fields = append(fields, "to_location = ?")
-// 		args = append(args, input.ToLocation.Value)
-// 	}
-// 	if input.PreferredDate != nil {
-// 		fields = append(fields, "preferred_date = ?")
-// 		args = append(args, input.PreferredDate.Value)
-// 	}
-// 	if input.ResponsibleId != nil {
-// 		fields = append(fields, "responsible_id = ?")
-// 		args = append(args, input.ResponsibleId.Value)
-// 	}
-// 	if input.StatusId != nil {
-// 		// Получить старый статус
-// 		row := tx.QueryRow("SELECT status_id FROM requests WHERE id = ?", input.RequestId.Value)
-// 		if err := row.Scan(&oldStatus); err != nil {
-// 			return false, fmt.Errorf("не удалось получить текущий статус заявки: %v", err), nsSend
-// 		}
-
-// 		// Добавить поле к обновлению
-// 		fields = append(fields, "status_id = ?")
-// 		args = append(args, input.StatusId.Value)
-// 	}
-
-// 	if len(fields) == 0 {
-// 		return false, fmt.Errorf("no fields to update"), nsSend
-// 	}
-
-// 	query := fmt.Sprintf("UPDATE requests SET %s WHERE id = ?", strings.Join(fields, ", "))
-// 	args = append(args, input.RequestId.Value)
-
-// 	stmt, err := tx.Prepare(query)
-// 	if err != nil {
-// 		return false, err, nsSend
-// 	}
-// 	defer stmt.Close()
-
-// 	res, err := stmt.Exec(args...)
-// 	if err != nil {
-// 		return false, err, nsSend
-// 	}
-
-// 	affected, err := res.RowsAffected()
-// 	if err != nil {
-// 		return false, err, nsSend
-// 	}
-
-// 	// Если статус менялся — добавить запись в журнал
-// 	if input.StatusId != nil && input.StatusId.Value != oldStatus {
-// 		nsSend = true
-// 		journalStmt, err := tx.Prepare(`
-// 			INSERT INTO request_status_journal (request_id, old_status, new_status, created_at)
-// 			VALUES (?, ?, ?, ?)
-// 		`)
-// 		if err != nil {
-// 			return false, err, false
-// 		}
-// 		defer journalStmt.Close()
-
-// 		_, err = journalStmt.Exec(
-// 			input.RequestId.Value,
-// 			oldStatus,
-// 			input.StatusId.Value,
-// 			time.Now(),
-// 		)
-// 		if err != nil {
-// 			return false, err, false
-// 		}
-
-// 	}
-
-// 	if err := tx.Commit(); err != nil {
-// 		return false, fmt.Errorf("ошибка при коммите транзакции: %w", err), nsSend
-// 	}
-
-// 	return affected > 0, nil, nsSend
 // }
