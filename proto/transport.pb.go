@@ -438,8 +438,8 @@ const file_proto_transport_proto_rawDesc = "" +
 	"\x1bGetTransportLogsInfoRequest\x12!\n" +
 	"\ftransport_id\x18\x01 \x01(\x05R\vtransportId\"8\n" +
 	"\x1cGetTransportLogsInfoResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess2\xef\x02\n" +
-	"\x13NotificationService\x12P\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess2\xec\x02\n" +
+	"\x10TransportService\x12P\n" +
 	"\x0fCreateTransport\x12\x1d.proto.CreateTransportRequest\x1a\x1e.proto.CreateTransportResponse\x12P\n" +
 	"\x0fUpdateTransport\x12\x1d.proto.UpdateTransportRequest\x1a\x1e.proto.UpdateTransportResponse\x12S\n" +
 	"\x10GetTransportInfo\x12\x1e.proto.GetTransportInfoRequest\x1a\x1f.proto.GetTransportInfoResponse\x12_\n" +
@@ -469,14 +469,14 @@ var file_proto_transport_proto_goTypes = []any{
 	(*GetTransportLogsInfoResponse)(nil), // 7: proto.GetTransportLogsInfoResponse
 }
 var file_proto_transport_proto_depIdxs = []int32{
-	0, // 0: proto.NotificationService.CreateTransport:input_type -> proto.CreateTransportRequest
-	2, // 1: proto.NotificationService.UpdateTransport:input_type -> proto.UpdateTransportRequest
-	4, // 2: proto.NotificationService.GetTransportInfo:input_type -> proto.GetTransportInfoRequest
-	6, // 3: proto.NotificationService.GetTransportLogsInfo:input_type -> proto.GetTransportLogsInfoRequest
-	1, // 4: proto.NotificationService.CreateTransport:output_type -> proto.CreateTransportResponse
-	3, // 5: proto.NotificationService.UpdateTransport:output_type -> proto.UpdateTransportResponse
-	5, // 6: proto.NotificationService.GetTransportInfo:output_type -> proto.GetTransportInfoResponse
-	7, // 7: proto.NotificationService.GetTransportLogsInfo:output_type -> proto.GetTransportLogsInfoResponse
+	0, // 0: proto.TransportService.CreateTransport:input_type -> proto.CreateTransportRequest
+	2, // 1: proto.TransportService.UpdateTransport:input_type -> proto.UpdateTransportRequest
+	4, // 2: proto.TransportService.GetTransportInfo:input_type -> proto.GetTransportInfoRequest
+	6, // 3: proto.TransportService.GetTransportLogsInfo:input_type -> proto.GetTransportLogsInfoRequest
+	1, // 4: proto.TransportService.CreateTransport:output_type -> proto.CreateTransportResponse
+	3, // 5: proto.TransportService.UpdateTransport:output_type -> proto.UpdateTransportResponse
+	5, // 6: proto.TransportService.GetTransportInfo:output_type -> proto.GetTransportInfoResponse
+	7, // 7: proto.TransportService.GetTransportLogsInfo:output_type -> proto.GetTransportLogsInfoResponse
 	4, // [4:8] is the sub-list for method output_type
 	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

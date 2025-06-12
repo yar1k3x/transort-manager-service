@@ -19,215 +19,215 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	NotificationService_CreateTransport_FullMethodName      = "/proto.NotificationService/CreateTransport"
-	NotificationService_UpdateTransport_FullMethodName      = "/proto.NotificationService/UpdateTransport"
-	NotificationService_GetTransportInfo_FullMethodName     = "/proto.NotificationService/GetTransportInfo"
-	NotificationService_GetTransportLogsInfo_FullMethodName = "/proto.NotificationService/GetTransportLogsInfo"
+	TransportService_CreateTransport_FullMethodName      = "/proto.TransportService/CreateTransport"
+	TransportService_UpdateTransport_FullMethodName      = "/proto.TransportService/UpdateTransport"
+	TransportService_GetTransportInfo_FullMethodName     = "/proto.TransportService/GetTransportInfo"
+	TransportService_GetTransportLogsInfo_FullMethodName = "/proto.TransportService/GetTransportLogsInfo"
 )
 
-// NotificationServiceClient is the client API for NotificationService service.
+// TransportServiceClient is the client API for TransportService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type NotificationServiceClient interface {
+type TransportServiceClient interface {
 	CreateTransport(ctx context.Context, in *CreateTransportRequest, opts ...grpc.CallOption) (*CreateTransportResponse, error)
 	UpdateTransport(ctx context.Context, in *UpdateTransportRequest, opts ...grpc.CallOption) (*UpdateTransportResponse, error)
 	GetTransportInfo(ctx context.Context, in *GetTransportInfoRequest, opts ...grpc.CallOption) (*GetTransportInfoResponse, error)
 	GetTransportLogsInfo(ctx context.Context, in *GetTransportLogsInfoRequest, opts ...grpc.CallOption) (*GetTransportLogsInfoResponse, error)
 }
 
-type notificationServiceClient struct {
+type transportServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewNotificationServiceClient(cc grpc.ClientConnInterface) NotificationServiceClient {
-	return &notificationServiceClient{cc}
+func NewTransportServiceClient(cc grpc.ClientConnInterface) TransportServiceClient {
+	return &transportServiceClient{cc}
 }
 
-func (c *notificationServiceClient) CreateTransport(ctx context.Context, in *CreateTransportRequest, opts ...grpc.CallOption) (*CreateTransportResponse, error) {
+func (c *transportServiceClient) CreateTransport(ctx context.Context, in *CreateTransportRequest, opts ...grpc.CallOption) (*CreateTransportResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateTransportResponse)
-	err := c.cc.Invoke(ctx, NotificationService_CreateTransport_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, TransportService_CreateTransport_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *notificationServiceClient) UpdateTransport(ctx context.Context, in *UpdateTransportRequest, opts ...grpc.CallOption) (*UpdateTransportResponse, error) {
+func (c *transportServiceClient) UpdateTransport(ctx context.Context, in *UpdateTransportRequest, opts ...grpc.CallOption) (*UpdateTransportResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateTransportResponse)
-	err := c.cc.Invoke(ctx, NotificationService_UpdateTransport_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, TransportService_UpdateTransport_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *notificationServiceClient) GetTransportInfo(ctx context.Context, in *GetTransportInfoRequest, opts ...grpc.CallOption) (*GetTransportInfoResponse, error) {
+func (c *transportServiceClient) GetTransportInfo(ctx context.Context, in *GetTransportInfoRequest, opts ...grpc.CallOption) (*GetTransportInfoResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetTransportInfoResponse)
-	err := c.cc.Invoke(ctx, NotificationService_GetTransportInfo_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, TransportService_GetTransportInfo_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *notificationServiceClient) GetTransportLogsInfo(ctx context.Context, in *GetTransportLogsInfoRequest, opts ...grpc.CallOption) (*GetTransportLogsInfoResponse, error) {
+func (c *transportServiceClient) GetTransportLogsInfo(ctx context.Context, in *GetTransportLogsInfoRequest, opts ...grpc.CallOption) (*GetTransportLogsInfoResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetTransportLogsInfoResponse)
-	err := c.cc.Invoke(ctx, NotificationService_GetTransportLogsInfo_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, TransportService_GetTransportLogsInfo_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// NotificationServiceServer is the server API for NotificationService service.
-// All implementations must embed UnimplementedNotificationServiceServer
+// TransportServiceServer is the server API for TransportService service.
+// All implementations must embed UnimplementedTransportServiceServer
 // for forward compatibility.
-type NotificationServiceServer interface {
+type TransportServiceServer interface {
 	CreateTransport(context.Context, *CreateTransportRequest) (*CreateTransportResponse, error)
 	UpdateTransport(context.Context, *UpdateTransportRequest) (*UpdateTransportResponse, error)
 	GetTransportInfo(context.Context, *GetTransportInfoRequest) (*GetTransportInfoResponse, error)
 	GetTransportLogsInfo(context.Context, *GetTransportLogsInfoRequest) (*GetTransportLogsInfoResponse, error)
-	mustEmbedUnimplementedNotificationServiceServer()
+	mustEmbedUnimplementedTransportServiceServer()
 }
 
-// UnimplementedNotificationServiceServer must be embedded to have
+// UnimplementedTransportServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedNotificationServiceServer struct{}
+type UnimplementedTransportServiceServer struct{}
 
-func (UnimplementedNotificationServiceServer) CreateTransport(context.Context, *CreateTransportRequest) (*CreateTransportResponse, error) {
+func (UnimplementedTransportServiceServer) CreateTransport(context.Context, *CreateTransportRequest) (*CreateTransportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateTransport not implemented")
 }
-func (UnimplementedNotificationServiceServer) UpdateTransport(context.Context, *UpdateTransportRequest) (*UpdateTransportResponse, error) {
+func (UnimplementedTransportServiceServer) UpdateTransport(context.Context, *UpdateTransportRequest) (*UpdateTransportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTransport not implemented")
 }
-func (UnimplementedNotificationServiceServer) GetTransportInfo(context.Context, *GetTransportInfoRequest) (*GetTransportInfoResponse, error) {
+func (UnimplementedTransportServiceServer) GetTransportInfo(context.Context, *GetTransportInfoRequest) (*GetTransportInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTransportInfo not implemented")
 }
-func (UnimplementedNotificationServiceServer) GetTransportLogsInfo(context.Context, *GetTransportLogsInfoRequest) (*GetTransportLogsInfoResponse, error) {
+func (UnimplementedTransportServiceServer) GetTransportLogsInfo(context.Context, *GetTransportLogsInfoRequest) (*GetTransportLogsInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTransportLogsInfo not implemented")
 }
-func (UnimplementedNotificationServiceServer) mustEmbedUnimplementedNotificationServiceServer() {}
-func (UnimplementedNotificationServiceServer) testEmbeddedByValue()                             {}
+func (UnimplementedTransportServiceServer) mustEmbedUnimplementedTransportServiceServer() {}
+func (UnimplementedTransportServiceServer) testEmbeddedByValue()                          {}
 
-// UnsafeNotificationServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to NotificationServiceServer will
+// UnsafeTransportServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to TransportServiceServer will
 // result in compilation errors.
-type UnsafeNotificationServiceServer interface {
-	mustEmbedUnimplementedNotificationServiceServer()
+type UnsafeTransportServiceServer interface {
+	mustEmbedUnimplementedTransportServiceServer()
 }
 
-func RegisterNotificationServiceServer(s grpc.ServiceRegistrar, srv NotificationServiceServer) {
-	// If the following call pancis, it indicates UnimplementedNotificationServiceServer was
+func RegisterTransportServiceServer(s grpc.ServiceRegistrar, srv TransportServiceServer) {
+	// If the following call pancis, it indicates UnimplementedTransportServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&NotificationService_ServiceDesc, srv)
+	s.RegisterService(&TransportService_ServiceDesc, srv)
 }
 
-func _NotificationService_CreateTransport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TransportService_CreateTransport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateTransportRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NotificationServiceServer).CreateTransport(ctx, in)
+		return srv.(TransportServiceServer).CreateTransport(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: NotificationService_CreateTransport_FullMethodName,
+		FullMethod: TransportService_CreateTransport_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationServiceServer).CreateTransport(ctx, req.(*CreateTransportRequest))
+		return srv.(TransportServiceServer).CreateTransport(ctx, req.(*CreateTransportRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NotificationService_UpdateTransport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TransportService_UpdateTransport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateTransportRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NotificationServiceServer).UpdateTransport(ctx, in)
+		return srv.(TransportServiceServer).UpdateTransport(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: NotificationService_UpdateTransport_FullMethodName,
+		FullMethod: TransportService_UpdateTransport_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationServiceServer).UpdateTransport(ctx, req.(*UpdateTransportRequest))
+		return srv.(TransportServiceServer).UpdateTransport(ctx, req.(*UpdateTransportRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NotificationService_GetTransportInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TransportService_GetTransportInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetTransportInfoRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NotificationServiceServer).GetTransportInfo(ctx, in)
+		return srv.(TransportServiceServer).GetTransportInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: NotificationService_GetTransportInfo_FullMethodName,
+		FullMethod: TransportService_GetTransportInfo_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationServiceServer).GetTransportInfo(ctx, req.(*GetTransportInfoRequest))
+		return srv.(TransportServiceServer).GetTransportInfo(ctx, req.(*GetTransportInfoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NotificationService_GetTransportLogsInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TransportService_GetTransportLogsInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetTransportLogsInfoRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NotificationServiceServer).GetTransportLogsInfo(ctx, in)
+		return srv.(TransportServiceServer).GetTransportLogsInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: NotificationService_GetTransportLogsInfo_FullMethodName,
+		FullMethod: TransportService_GetTransportLogsInfo_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationServiceServer).GetTransportLogsInfo(ctx, req.(*GetTransportLogsInfoRequest))
+		return srv.(TransportServiceServer).GetTransportLogsInfo(ctx, req.(*GetTransportLogsInfoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// NotificationService_ServiceDesc is the grpc.ServiceDesc for NotificationService service.
+// TransportService_ServiceDesc is the grpc.ServiceDesc for TransportService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var NotificationService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "proto.NotificationService",
-	HandlerType: (*NotificationServiceServer)(nil),
+var TransportService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "proto.TransportService",
+	HandlerType: (*TransportServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "CreateTransport",
-			Handler:    _NotificationService_CreateTransport_Handler,
+			Handler:    _TransportService_CreateTransport_Handler,
 		},
 		{
 			MethodName: "UpdateTransport",
-			Handler:    _NotificationService_UpdateTransport_Handler,
+			Handler:    _TransportService_UpdateTransport_Handler,
 		},
 		{
 			MethodName: "GetTransportInfo",
-			Handler:    _NotificationService_GetTransportInfo_Handler,
+			Handler:    _TransportService_GetTransportInfo_Handler,
 		},
 		{
 			MethodName: "GetTransportLogsInfo",
-			Handler:    _NotificationService_GetTransportLogsInfo_Handler,
+			Handler:    _TransportService_GetTransportLogsInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

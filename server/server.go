@@ -16,7 +16,7 @@ import (
 )
 
 type server struct {
-	pb.UnimplementedNotificationServiceServer
+	pb.UnimplementedTransportServiceServer
 }
 
 func (s *server) CreateRequest(ctx context.Context, in *pb.CreateTransportRequest) (*pb.CreateTransportResponse, error) {
@@ -47,7 +47,7 @@ func Start() {
 
 	s := grpc.NewServer()
 
-	pb.RegisterNotificationServiceServer(s, &server{}) // Регистрация gRPC-сервиса
+	pb.RegisterTransportServiceServer(s, &server{}) // Регистрация gRPC-сервиса
 
 	reflection.Register(s)
 	log.Println("gRPC сервер запущен на порту 50054")
