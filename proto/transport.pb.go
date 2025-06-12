@@ -355,7 +355,7 @@ type TransportInfo struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	TransportId     int32                  `protobuf:"varint,1,opt,name=transport_id,json=transportId,proto3" json:"transport_id,omitempty"`
 	Number          string                 `protobuf:"bytes,2,opt,name=number,proto3" json:"number,omitempty"`
-	TypeId          int32                  `protobuf:"varint,3,opt,name=type_id,json=typeId,proto3" json:"type_id,omitempty"`
+	TransportType   string                 `protobuf:"bytes,3,opt,name=transport_type,json=transportType,proto3" json:"transport_type,omitempty"`
 	IsActive        int32                  `protobuf:"varint,4,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
 	CurrentDriverId int32                  `protobuf:"varint,5,opt,name=current_driver_id,json=currentDriverId,proto3" json:"current_driver_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -406,11 +406,11 @@ func (x *TransportInfo) GetNumber() string {
 	return ""
 }
 
-func (x *TransportInfo) GetTypeId() int32 {
+func (x *TransportInfo) GetTransportType() string {
 	if x != nil {
-		return x.TypeId
+		return x.TransportType
 	}
-	return 0
+	return ""
 }
 
 func (x *TransportInfo) GetIsActive() int32 {
@@ -453,11 +453,11 @@ const file_proto_transport_proto_rawDesc = "" +
 	"\x18GetTransportInfoResponse\x124\n" +
 	"\n" +
 	"transports\x18\x01 \x03(\v2\x14.proto.TransportInfoR\n" +
-	"transports\"\xac\x01\n" +
+	"transports\"\xba\x01\n" +
 	"\rTransportInfo\x12!\n" +
 	"\ftransport_id\x18\x01 \x01(\x05R\vtransportId\x12\x16\n" +
-	"\x06number\x18\x02 \x01(\tR\x06number\x12\x17\n" +
-	"\atype_id\x18\x03 \x01(\x05R\x06typeId\x12\x1b\n" +
+	"\x06number\x18\x02 \x01(\tR\x06number\x12%\n" +
+	"\x0etransport_type\x18\x03 \x01(\tR\rtransportType\x12\x1b\n" +
 	"\tis_active\x18\x04 \x01(\x05R\bisActive\x12*\n" +
 	"\x11current_driver_id\x18\x05 \x01(\x05R\x0fcurrentDriverId2\x8b\x02\n" +
 	"\x10TransportService\x12P\n" +

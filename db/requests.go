@@ -86,25 +86,31 @@ func UpdateTransportRequest(input *proto.UpdateTransportRequest) (bool, error) {
 
 func GetTransportRequest(input *proto.GetTransportInfoRequest) ([]*proto.TransportInfo, error) {
 	baseQuery := `
-        SELECT
-            id, number, type_id, is_active, current_driver_id
-        FROM transports
+		SELECT
+			t.id,
+			t.number,
+			tt.name AS type_name,
+			t.is_active,
+			t.current_driver_id
+		FROM transports t
+		JOIN transport_type tt ON t.type_id = tt.id
+
     `
 
 	var args []interface{}
 	var conditions []string
 
 	if input.TransportId != nil {
-		conditions = append(conditions, "id = ?")
+		conditions = append(conditions, "t.id = ?")
 		args = append(args, input.TransportId.Value)
 	}
 
 	if input.IsActive != nil {
-		conditions = append(conditions, "is_active = ?")
+		conditions = append(conditions, "t.is_active = ?")
 		args = append(args, input.IsActive.Value)
 	}
 	if input.CurrentDriverId != nil {
-		conditions = append(conditions, "current_driver_id = ?")
+		conditions = append(conditions, "t.current_driver_id = ?")
 		args = append(args, input.CurrentDriverId.Value)
 	}
 
@@ -130,7 +136,7 @@ func GetTransportRequest(input *proto.GetTransportInfoRequest) ([]*proto.Transpo
 		err := rows.Scan(
 			&r.TransportId,
 			&r.Number,
-			&r.TypeId,
+			&r.TransportType,
 			&r.IsActive,
 			&r.CurrentDriverId,
 			//&createdAt,
