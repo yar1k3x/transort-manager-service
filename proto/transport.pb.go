@@ -141,278 +141,6 @@ func (x *CreateTransportResponse) GetTransportId() int64 {
 	return 0
 }
 
-type UpdateTransportRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	IsActive        int32                  `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
-	CurrentDriverId int32                  `protobuf:"varint,2,opt,name=current_driver_id,json=currentDriverId,proto3" json:"current_driver_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
-}
-
-func (x *UpdateTransportRequest) Reset() {
-	*x = UpdateTransportRequest{}
-	mi := &file_proto_transport_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateTransportRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateTransportRequest) ProtoMessage() {}
-
-func (x *UpdateTransportRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_transport_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateTransportRequest.ProtoReflect.Descriptor instead.
-func (*UpdateTransportRequest) Descriptor() ([]byte, []int) {
-	return file_proto_transport_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *UpdateTransportRequest) GetIsActive() int32 {
-	if x != nil {
-		return x.IsActive
-	}
-	return 0
-}
-
-func (x *UpdateTransportRequest) GetCurrentDriverId() int32 {
-	if x != nil {
-		return x.CurrentDriverId
-	}
-	return 0
-}
-
-type UpdateTransportResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateTransportResponse) Reset() {
-	*x = UpdateTransportResponse{}
-	mi := &file_proto_transport_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateTransportResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateTransportResponse) ProtoMessage() {}
-
-func (x *UpdateTransportResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_transport_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateTransportResponse.ProtoReflect.Descriptor instead.
-func (*UpdateTransportResponse) Descriptor() ([]byte, []int) {
-	return file_proto_transport_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *UpdateTransportResponse) GetSuccess() bool {
-	if x != nil {
-		return x.Success
-	}
-	return false
-}
-
-type GetTransportInfoRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TransportId   int32                  `protobuf:"varint,1,opt,name=transport_id,json=transportId,proto3" json:"transport_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetTransportInfoRequest) Reset() {
-	*x = GetTransportInfoRequest{}
-	mi := &file_proto_transport_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetTransportInfoRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetTransportInfoRequest) ProtoMessage() {}
-
-func (x *GetTransportInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_transport_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetTransportInfoRequest.ProtoReflect.Descriptor instead.
-func (*GetTransportInfoRequest) Descriptor() ([]byte, []int) {
-	return file_proto_transport_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *GetTransportInfoRequest) GetTransportId() int32 {
-	if x != nil {
-		return x.TransportId
-	}
-	return 0
-}
-
-type GetTransportInfoResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetTransportInfoResponse) Reset() {
-	*x = GetTransportInfoResponse{}
-	mi := &file_proto_transport_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetTransportInfoResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetTransportInfoResponse) ProtoMessage() {}
-
-func (x *GetTransportInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_transport_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetTransportInfoResponse.ProtoReflect.Descriptor instead.
-func (*GetTransportInfoResponse) Descriptor() ([]byte, []int) {
-	return file_proto_transport_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *GetTransportInfoResponse) GetSuccess() bool {
-	if x != nil {
-		return x.Success
-	}
-	return false
-}
-
-type GetTransportLogsInfoRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TransportId   int32                  `protobuf:"varint,1,opt,name=transport_id,json=transportId,proto3" json:"transport_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetTransportLogsInfoRequest) Reset() {
-	*x = GetTransportLogsInfoRequest{}
-	mi := &file_proto_transport_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetTransportLogsInfoRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetTransportLogsInfoRequest) ProtoMessage() {}
-
-func (x *GetTransportLogsInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_transport_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetTransportLogsInfoRequest.ProtoReflect.Descriptor instead.
-func (*GetTransportLogsInfoRequest) Descriptor() ([]byte, []int) {
-	return file_proto_transport_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *GetTransportLogsInfoRequest) GetTransportId() int32 {
-	if x != nil {
-		return x.TransportId
-	}
-	return 0
-}
-
-type GetTransportLogsInfoResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetTransportLogsInfoResponse) Reset() {
-	*x = GetTransportLogsInfoResponse{}
-	mi := &file_proto_transport_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetTransportLogsInfoResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetTransportLogsInfoResponse) ProtoMessage() {}
-
-func (x *GetTransportLogsInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_transport_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetTransportLogsInfoResponse.ProtoReflect.Descriptor instead.
-func (*GetTransportLogsInfoResponse) Descriptor() ([]byte, []int) {
-	return file_proto_transport_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *GetTransportLogsInfoResponse) GetSuccess() bool {
-	if x != nil {
-		return x.Success
-	}
-	return false
-}
-
 var File_proto_transport_proto protoreflect.FileDescriptor
 
 const file_proto_transport_proto_rawDesc = "" +
@@ -425,25 +153,9 @@ const file_proto_transport_proto_rawDesc = "" +
 	"\x11current_driver_id\x18\x04 \x01(\x05R\x0fcurrentDriverId\"V\n" +
 	"\x17CreateTransportResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12!\n" +
-	"\ftransport_id\x18\x02 \x01(\x03R\vtransportId\"a\n" +
-	"\x16UpdateTransportRequest\x12\x1b\n" +
-	"\tis_active\x18\x01 \x01(\x05R\bisActive\x12*\n" +
-	"\x11current_driver_id\x18\x02 \x01(\x05R\x0fcurrentDriverId\"3\n" +
-	"\x17UpdateTransportResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"<\n" +
-	"\x17GetTransportInfoRequest\x12!\n" +
-	"\ftransport_id\x18\x01 \x01(\x05R\vtransportId\"4\n" +
-	"\x18GetTransportInfoResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"@\n" +
-	"\x1bGetTransportLogsInfoRequest\x12!\n" +
-	"\ftransport_id\x18\x01 \x01(\x05R\vtransportId\"8\n" +
-	"\x1cGetTransportLogsInfoResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess2\xec\x02\n" +
+	"\ftransport_id\x18\x02 \x01(\x03R\vtransportId2d\n" +
 	"\x10TransportService\x12P\n" +
-	"\x0fCreateTransport\x12\x1d.proto.CreateTransportRequest\x1a\x1e.proto.CreateTransportResponse\x12P\n" +
-	"\x0fUpdateTransport\x12\x1d.proto.UpdateTransportRequest\x1a\x1e.proto.UpdateTransportResponse\x12S\n" +
-	"\x10GetTransportInfo\x12\x1e.proto.GetTransportInfoRequest\x1a\x1f.proto.GetTransportInfoResponse\x12_\n" +
-	"\x14GetTransportLogsInfo\x12\".proto.GetTransportLogsInfoRequest\x1a#.proto.GetTransportLogsInfoResponseB*Z(transport-management-service/proto;protob\x06proto3"
+	"\x0fCreateTransport\x12\x1d.proto.CreateTransportRequest\x1a\x1e.proto.CreateTransportResponseB(Z&TransportManagementService/proto;protob\x06proto3"
 
 var (
 	file_proto_transport_proto_rawDescOnce sync.Once
@@ -457,28 +169,16 @@ func file_proto_transport_proto_rawDescGZIP() []byte {
 	return file_proto_transport_proto_rawDescData
 }
 
-var file_proto_transport_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_proto_transport_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_proto_transport_proto_goTypes = []any{
-	(*CreateTransportRequest)(nil),       // 0: proto.CreateTransportRequest
-	(*CreateTransportResponse)(nil),      // 1: proto.CreateTransportResponse
-	(*UpdateTransportRequest)(nil),       // 2: proto.UpdateTransportRequest
-	(*UpdateTransportResponse)(nil),      // 3: proto.UpdateTransportResponse
-	(*GetTransportInfoRequest)(nil),      // 4: proto.GetTransportInfoRequest
-	(*GetTransportInfoResponse)(nil),     // 5: proto.GetTransportInfoResponse
-	(*GetTransportLogsInfoRequest)(nil),  // 6: proto.GetTransportLogsInfoRequest
-	(*GetTransportLogsInfoResponse)(nil), // 7: proto.GetTransportLogsInfoResponse
+	(*CreateTransportRequest)(nil),  // 0: proto.CreateTransportRequest
+	(*CreateTransportResponse)(nil), // 1: proto.CreateTransportResponse
 }
 var file_proto_transport_proto_depIdxs = []int32{
 	0, // 0: proto.TransportService.CreateTransport:input_type -> proto.CreateTransportRequest
-	2, // 1: proto.TransportService.UpdateTransport:input_type -> proto.UpdateTransportRequest
-	4, // 2: proto.TransportService.GetTransportInfo:input_type -> proto.GetTransportInfoRequest
-	6, // 3: proto.TransportService.GetTransportLogsInfo:input_type -> proto.GetTransportLogsInfoRequest
-	1, // 4: proto.TransportService.CreateTransport:output_type -> proto.CreateTransportResponse
-	3, // 5: proto.TransportService.UpdateTransport:output_type -> proto.UpdateTransportResponse
-	5, // 6: proto.TransportService.GetTransportInfo:output_type -> proto.GetTransportInfoResponse
-	7, // 7: proto.TransportService.GetTransportLogsInfo:output_type -> proto.GetTransportLogsInfoResponse
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
+	1, // 1: proto.TransportService.CreateTransport:output_type -> proto.CreateTransportResponse
+	1, // [1:2] is the sub-list for method output_type
+	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -495,7 +195,7 @@ func file_proto_transport_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_transport_proto_rawDesc), len(file_proto_transport_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -19,7 +19,7 @@ type server struct {
 	pb.UnimplementedTransportServiceServer
 }
 
-func (s *server) CreateRequest(ctx context.Context, in *pb.CreateTransportRequest) (*pb.CreateTransportResponse, error) {
+func (s *server) CreateTransport(ctx context.Context, in *pb.CreateTransportRequest) (*pb.CreateTransportResponse, error) {
 	log.Printf("Получен запрос от пользователя на создание транспорта")
 
 	// if err := in.Validate(); err != nil {
@@ -35,6 +35,7 @@ func (s *server) CreateRequest(ctx context.Context, in *pb.CreateTransportReques
 	log.Printf("Заявка успешно создана с ID %d", requestID)
 
 	return &pb.CreateTransportResponse{
+		Success:     true,
 		TransportId: requestID,
 	}, nil
 }

@@ -19,10 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	TransportService_CreateTransport_FullMethodName      = "/proto.TransportService/CreateTransport"
-	TransportService_UpdateTransport_FullMethodName      = "/proto.TransportService/UpdateTransport"
-	TransportService_GetTransportInfo_FullMethodName     = "/proto.TransportService/GetTransportInfo"
-	TransportService_GetTransportLogsInfo_FullMethodName = "/proto.TransportService/GetTransportLogsInfo"
+	TransportService_CreateTransport_FullMethodName = "/proto.TransportService/CreateTransport"
 )
 
 // TransportServiceClient is the client API for TransportService service.
@@ -30,9 +27,6 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TransportServiceClient interface {
 	CreateTransport(ctx context.Context, in *CreateTransportRequest, opts ...grpc.CallOption) (*CreateTransportResponse, error)
-	UpdateTransport(ctx context.Context, in *UpdateTransportRequest, opts ...grpc.CallOption) (*UpdateTransportResponse, error)
-	GetTransportInfo(ctx context.Context, in *GetTransportInfoRequest, opts ...grpc.CallOption) (*GetTransportInfoResponse, error)
-	GetTransportLogsInfo(ctx context.Context, in *GetTransportLogsInfoRequest, opts ...grpc.CallOption) (*GetTransportLogsInfoResponse, error)
 }
 
 type transportServiceClient struct {
@@ -53,44 +47,11 @@ func (c *transportServiceClient) CreateTransport(ctx context.Context, in *Create
 	return out, nil
 }
 
-func (c *transportServiceClient) UpdateTransport(ctx context.Context, in *UpdateTransportRequest, opts ...grpc.CallOption) (*UpdateTransportResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateTransportResponse)
-	err := c.cc.Invoke(ctx, TransportService_UpdateTransport_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *transportServiceClient) GetTransportInfo(ctx context.Context, in *GetTransportInfoRequest, opts ...grpc.CallOption) (*GetTransportInfoResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetTransportInfoResponse)
-	err := c.cc.Invoke(ctx, TransportService_GetTransportInfo_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *transportServiceClient) GetTransportLogsInfo(ctx context.Context, in *GetTransportLogsInfoRequest, opts ...grpc.CallOption) (*GetTransportLogsInfoResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetTransportLogsInfoResponse)
-	err := c.cc.Invoke(ctx, TransportService_GetTransportLogsInfo_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // TransportServiceServer is the server API for TransportService service.
 // All implementations must embed UnimplementedTransportServiceServer
 // for forward compatibility.
 type TransportServiceServer interface {
 	CreateTransport(context.Context, *CreateTransportRequest) (*CreateTransportResponse, error)
-	UpdateTransport(context.Context, *UpdateTransportRequest) (*UpdateTransportResponse, error)
-	GetTransportInfo(context.Context, *GetTransportInfoRequest) (*GetTransportInfoResponse, error)
-	GetTransportLogsInfo(context.Context, *GetTransportLogsInfoRequest) (*GetTransportLogsInfoResponse, error)
 	mustEmbedUnimplementedTransportServiceServer()
 }
 
@@ -103,15 +64,6 @@ type UnimplementedTransportServiceServer struct{}
 
 func (UnimplementedTransportServiceServer) CreateTransport(context.Context, *CreateTransportRequest) (*CreateTransportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateTransport not implemented")
-}
-func (UnimplementedTransportServiceServer) UpdateTransport(context.Context, *UpdateTransportRequest) (*UpdateTransportResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateTransport not implemented")
-}
-func (UnimplementedTransportServiceServer) GetTransportInfo(context.Context, *GetTransportInfoRequest) (*GetTransportInfoResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTransportInfo not implemented")
-}
-func (UnimplementedTransportServiceServer) GetTransportLogsInfo(context.Context, *GetTransportLogsInfoRequest) (*GetTransportLogsInfoResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTransportLogsInfo not implemented")
 }
 func (UnimplementedTransportServiceServer) mustEmbedUnimplementedTransportServiceServer() {}
 func (UnimplementedTransportServiceServer) testEmbeddedByValue()                          {}
@@ -152,60 +104,6 @@ func _TransportService_CreateTransport_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TransportService_UpdateTransport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateTransportRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TransportServiceServer).UpdateTransport(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: TransportService_UpdateTransport_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TransportServiceServer).UpdateTransport(ctx, req.(*UpdateTransportRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _TransportService_GetTransportInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTransportInfoRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TransportServiceServer).GetTransportInfo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: TransportService_GetTransportInfo_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TransportServiceServer).GetTransportInfo(ctx, req.(*GetTransportInfoRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _TransportService_GetTransportLogsInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTransportLogsInfoRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TransportServiceServer).GetTransportLogsInfo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: TransportService_GetTransportLogsInfo_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TransportServiceServer).GetTransportLogsInfo(ctx, req.(*GetTransportLogsInfoRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // TransportService_ServiceDesc is the grpc.ServiceDesc for TransportService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -216,18 +114,6 @@ var TransportService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateTransport",
 			Handler:    _TransportService_CreateTransport_Handler,
-		},
-		{
-			MethodName: "UpdateTransport",
-			Handler:    _TransportService_UpdateTransport_Handler,
-		},
-		{
-			MethodName: "GetTransportInfo",
-			Handler:    _TransportService_GetTransportInfo_Handler,
-		},
-		{
-			MethodName: "GetTransportLogsInfo",
-			Handler:    _TransportService_GetTransportLogsInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
