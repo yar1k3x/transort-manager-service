@@ -10,7 +10,7 @@ import (
 
 func main() {
 	log.Println("🚀 Запуск InitDB...")
-	err := db.InitDB("root", "vdySqAwCIwMHUfdUyqaQlBOBlCrZovdD", "centerbeam.proxy.rlwy.net", "railway")
+	err := db.InitDB("root", "vdySqAwCIwMHUfdUyqaQlBOBlCrZovdD", "centerbeam.proxy.rlwy.net:3885", "railway")
 
 	if err != nil {
 		log.Println("Не удалось подключиться к базе данных")
