@@ -247,6 +247,186 @@ func (x *UpdateTransportResponse) GetSuccess() bool {
 	return false
 }
 
+type GetTransportInfoRequest struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	TransportId     *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=transport_id,json=transportId,proto3" json:"transport_id,omitempty"`
+	IsActive        *wrapperspb.Int32Value `protobuf:"bytes,2,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	CurrentDriverId *wrapperspb.Int32Value `protobuf:"bytes,3,opt,name=current_driver_id,json=currentDriverId,proto3" json:"current_driver_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *GetTransportInfoRequest) Reset() {
+	*x = GetTransportInfoRequest{}
+	mi := &file_proto_transport_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTransportInfoRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTransportInfoRequest) ProtoMessage() {}
+
+func (x *GetTransportInfoRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_transport_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTransportInfoRequest.ProtoReflect.Descriptor instead.
+func (*GetTransportInfoRequest) Descriptor() ([]byte, []int) {
+	return file_proto_transport_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetTransportInfoRequest) GetTransportId() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.TransportId
+	}
+	return nil
+}
+
+func (x *GetTransportInfoRequest) GetIsActive() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.IsActive
+	}
+	return nil
+}
+
+func (x *GetTransportInfoRequest) GetCurrentDriverId() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.CurrentDriverId
+	}
+	return nil
+}
+
+type GetTransportInfoResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Transports    []*TransportInfo       `protobuf:"bytes,1,rep,name=transports,proto3" json:"transports,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTransportInfoResponse) Reset() {
+	*x = GetTransportInfoResponse{}
+	mi := &file_proto_transport_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTransportInfoResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTransportInfoResponse) ProtoMessage() {}
+
+func (x *GetTransportInfoResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_transport_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTransportInfoResponse.ProtoReflect.Descriptor instead.
+func (*GetTransportInfoResponse) Descriptor() ([]byte, []int) {
+	return file_proto_transport_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetTransportInfoResponse) GetTransports() []*TransportInfo {
+	if x != nil {
+		return x.Transports
+	}
+	return nil
+}
+
+type TransportInfo struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	TransportId     int32                  `protobuf:"varint,1,opt,name=transport_id,json=transportId,proto3" json:"transport_id,omitempty"`
+	Number          string                 `protobuf:"bytes,2,opt,name=number,proto3" json:"number,omitempty"`
+	TypeId          int32                  `protobuf:"varint,3,opt,name=type_id,json=typeId,proto3" json:"type_id,omitempty"`
+	IsActive        int32                  `protobuf:"varint,4,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	CurrentDriverId int32                  `protobuf:"varint,5,opt,name=current_driver_id,json=currentDriverId,proto3" json:"current_driver_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *TransportInfo) Reset() {
+	*x = TransportInfo{}
+	mi := &file_proto_transport_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransportInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransportInfo) ProtoMessage() {}
+
+func (x *TransportInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_transport_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransportInfo.ProtoReflect.Descriptor instead.
+func (*TransportInfo) Descriptor() ([]byte, []int) {
+	return file_proto_transport_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *TransportInfo) GetTransportId() int32 {
+	if x != nil {
+		return x.TransportId
+	}
+	return 0
+}
+
+func (x *TransportInfo) GetNumber() string {
+	if x != nil {
+		return x.Number
+	}
+	return ""
+}
+
+func (x *TransportInfo) GetTypeId() int32 {
+	if x != nil {
+		return x.TypeId
+	}
+	return 0
+}
+
+func (x *TransportInfo) GetIsActive() int32 {
+	if x != nil {
+		return x.IsActive
+	}
+	return 0
+}
+
+func (x *TransportInfo) GetCurrentDriverId() int32 {
+	if x != nil {
+		return x.CurrentDriverId
+	}
+	return 0
+}
+
 var File_proto_transport_proto protoreflect.FileDescriptor
 
 const file_proto_transport_proto_rawDesc = "" +
@@ -265,10 +445,25 @@ const file_proto_transport_proto_rawDesc = "" +
 	"\tis_active\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueR\bisActive\x12G\n" +
 	"\x11current_driver_id\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\x0fcurrentDriverId\"3\n" +
 	"\x17UpdateTransportResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess2\xb6\x01\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"\xdc\x01\n" +
+	"\x17GetTransportInfoRequest\x12>\n" +
+	"\ftransport_id\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\vtransportId\x128\n" +
+	"\tis_active\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueR\bisActive\x12G\n" +
+	"\x11current_driver_id\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\x0fcurrentDriverId\"P\n" +
+	"\x18GetTransportInfoResponse\x124\n" +
+	"\n" +
+	"transports\x18\x01 \x03(\v2\x14.proto.TransportInfoR\n" +
+	"transports\"\xac\x01\n" +
+	"\rTransportInfo\x12!\n" +
+	"\ftransport_id\x18\x01 \x01(\x05R\vtransportId\x12\x16\n" +
+	"\x06number\x18\x02 \x01(\tR\x06number\x12\x17\n" +
+	"\atype_id\x18\x03 \x01(\x05R\x06typeId\x12\x1b\n" +
+	"\tis_active\x18\x04 \x01(\x05R\bisActive\x12*\n" +
+	"\x11current_driver_id\x18\x05 \x01(\x05R\x0fcurrentDriverId2\x8b\x02\n" +
 	"\x10TransportService\x12P\n" +
 	"\x0fCreateTransport\x12\x1d.proto.CreateTransportRequest\x1a\x1e.proto.CreateTransportResponse\x12P\n" +
-	"\x0fUpdateTransport\x12\x1d.proto.UpdateTransportRequest\x1a\x1e.proto.UpdateTransportResponseB(Z&TransportManagementService/proto;protob\x06proto3"
+	"\x0fUpdateTransport\x12\x1d.proto.UpdateTransportRequest\x1a\x1e.proto.UpdateTransportResponse\x12S\n" +
+	"\x10GetTransportInfo\x12\x1e.proto.GetTransportInfoRequest\x1a\x1f.proto.GetTransportInfoResponseB(Z&TransportManagementService/proto;protob\x06proto3"
 
 var (
 	file_proto_transport_proto_rawDescOnce sync.Once
@@ -282,27 +477,36 @@ func file_proto_transport_proto_rawDescGZIP() []byte {
 	return file_proto_transport_proto_rawDescData
 }
 
-var file_proto_transport_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_proto_transport_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_proto_transport_proto_goTypes = []any{
-	(*CreateTransportRequest)(nil),  // 0: proto.CreateTransportRequest
-	(*CreateTransportResponse)(nil), // 1: proto.CreateTransportResponse
-	(*UpdateTransportRequest)(nil),  // 2: proto.UpdateTransportRequest
-	(*UpdateTransportResponse)(nil), // 3: proto.UpdateTransportResponse
-	(*wrapperspb.Int32Value)(nil),   // 4: google.protobuf.Int32Value
+	(*CreateTransportRequest)(nil),   // 0: proto.CreateTransportRequest
+	(*CreateTransportResponse)(nil),  // 1: proto.CreateTransportResponse
+	(*UpdateTransportRequest)(nil),   // 2: proto.UpdateTransportRequest
+	(*UpdateTransportResponse)(nil),  // 3: proto.UpdateTransportResponse
+	(*GetTransportInfoRequest)(nil),  // 4: proto.GetTransportInfoRequest
+	(*GetTransportInfoResponse)(nil), // 5: proto.GetTransportInfoResponse
+	(*TransportInfo)(nil),            // 6: proto.TransportInfo
+	(*wrapperspb.Int32Value)(nil),    // 7: google.protobuf.Int32Value
 }
 var file_proto_transport_proto_depIdxs = []int32{
-	4, // 0: proto.UpdateTransportRequest.transport_id:type_name -> google.protobuf.Int32Value
-	4, // 1: proto.UpdateTransportRequest.is_active:type_name -> google.protobuf.Int32Value
-	4, // 2: proto.UpdateTransportRequest.current_driver_id:type_name -> google.protobuf.Int32Value
-	0, // 3: proto.TransportService.CreateTransport:input_type -> proto.CreateTransportRequest
-	2, // 4: proto.TransportService.UpdateTransport:input_type -> proto.UpdateTransportRequest
-	1, // 5: proto.TransportService.CreateTransport:output_type -> proto.CreateTransportResponse
-	3, // 6: proto.TransportService.UpdateTransport:output_type -> proto.UpdateTransportResponse
-	5, // [5:7] is the sub-list for method output_type
-	3, // [3:5] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	7,  // 0: proto.UpdateTransportRequest.transport_id:type_name -> google.protobuf.Int32Value
+	7,  // 1: proto.UpdateTransportRequest.is_active:type_name -> google.protobuf.Int32Value
+	7,  // 2: proto.UpdateTransportRequest.current_driver_id:type_name -> google.protobuf.Int32Value
+	7,  // 3: proto.GetTransportInfoRequest.transport_id:type_name -> google.protobuf.Int32Value
+	7,  // 4: proto.GetTransportInfoRequest.is_active:type_name -> google.protobuf.Int32Value
+	7,  // 5: proto.GetTransportInfoRequest.current_driver_id:type_name -> google.protobuf.Int32Value
+	6,  // 6: proto.GetTransportInfoResponse.transports:type_name -> proto.TransportInfo
+	0,  // 7: proto.TransportService.CreateTransport:input_type -> proto.CreateTransportRequest
+	2,  // 8: proto.TransportService.UpdateTransport:input_type -> proto.UpdateTransportRequest
+	4,  // 9: proto.TransportService.GetTransportInfo:input_type -> proto.GetTransportInfoRequest
+	1,  // 10: proto.TransportService.CreateTransport:output_type -> proto.CreateTransportResponse
+	3,  // 11: proto.TransportService.UpdateTransport:output_type -> proto.UpdateTransportResponse
+	5,  // 12: proto.TransportService.GetTransportInfo:output_type -> proto.GetTransportInfoResponse
+	10, // [10:13] is the sub-list for method output_type
+	7,  // [7:10] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_proto_transport_proto_init() }
@@ -316,7 +520,7 @@ func file_proto_transport_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_transport_proto_rawDesc), len(file_proto_transport_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

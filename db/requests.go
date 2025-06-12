@@ -84,70 +84,70 @@ func UpdateTransportRequest(input *proto.UpdateTransportRequest) (bool, error) {
 	return affected > 0, nil
 }
 
-// func GetDeliveryRequests(input *proto.GetRequestInput) ([]*proto.DeliveryRequest, error) {
-// 	baseQuery := `
-//         SELECT
-//             id, weight, from_location, to_location,
-//             preferred_date, created_by, responsible_id, status_id, created_at
-//         FROM requests
-//     `
+func GetTransportRequest(input *proto.GetTransportInfoRequest) ([]*proto.TransportInfo, error) {
+	baseQuery := `
+        SELECT
+            id, number, type_id, is_active, current_driver_id
+        FROM transports
+    `
 
-// 	var args []interface{}
-// 	var conditions []string
+	var args []interface{}
+	var conditions []string
 
-// 	if input.UserId != nil {
-// 		conditions = append(conditions, "created_by = ?")
-// 		args = append(args, input.UserId.Value)
-// 	}
-// 	if input.StatusId != nil {
-// 		conditions = append(conditions, "status_id = ?")
-// 		args = append(args, input.StatusId.Value)
-// 	}
+	if input.TransportId != nil {
+		conditions = append(conditions, "id = ?")
+		args = append(args, input.TransportId.Value)
+	}
 
-// 	if len(conditions) > 0 {
-// 		baseQuery += " WHERE " + conditions[0]
-// 		for i := 1; i < len(conditions); i++ {
-// 			baseQuery += " AND " + conditions[i]
-// 		}
-// 	}
+	if input.IsActive != nil {
+		conditions = append(conditions, "is_active = ?")
+		args = append(args, input.IsActive.Value)
+	}
+	if input.CurrentDriverId != nil {
+		conditions = append(conditions, "current_driver_id = ?")
+		args = append(args, input.CurrentDriverId.Value)
+	}
 
-// 	rows, err := DB.Query(baseQuery, args...)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-// 	defer rows.Close()
+	if len(conditions) > 0 {
+		baseQuery += " WHERE " + conditions[0]
+		for i := 1; i < len(conditions); i++ {
+			baseQuery += " AND " + conditions[i]
+		}
+	}
 
-// 	var requests []*proto.DeliveryRequest
+	rows, err := DB.Query(baseQuery, args...)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
 
-// 	for rows.Next() {
-// 		var r proto.DeliveryRequest
-// 		var preferredDate time.Time
-// 		var createdAt time.Time
+	var transports []*proto.TransportInfo
 
-// 		err := rows.Scan(
-// 			&r.Id,
-// 			&r.Weight,
-// 			&r.FromLocation,
-// 			&r.ToLocation,
-// 			&preferredDate,
-// 			&r.CreatedBy,
-// 			&r.ResponsibleId,
-// 			&r.StatusId,
-// 			&createdAt,
-// 		)
-// 		if err != nil {
-// 			return nil, err
-// 		}
+	for rows.Next() {
+		var r proto.TransportInfo
+		// var createdAt time.Time
 
-// 		r.PreferredDate = preferredDate.Format(time.RFC3339)
-// 		r.CreatedAt = createdAt.Format(time.RFC3339)
+		err := rows.Scan(
+			&r.TransportId,
+			&r.Number,
+			&r.TypeId,
+			&r.IsActive,
+			&r.CurrentDriverId,
+			//&createdAt,
+		)
+		if err != nil {
+			return nil, err
+		}
 
-// 		requests = append(requests, &r)
-// 	}
+		// r.PreferredDate = preferredDate.Format(time.RFC3339)
+		// r.CreatedAt = createdAt.Format(time.RFC3339)
 
-// 	if err = rows.Err(); err != nil {
-// 		return nil, err
-// 	}
+		transports = append(transports, &r)
+	}
 
-// 	return requests, nil
-// }
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return transports, nil
+}

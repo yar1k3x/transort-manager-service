@@ -54,6 +54,20 @@ func (s *server) UpdateTransport(ctx context.Context, in *pb.UpdateTransportRequ
 	}, nil
 
 }
+func (s *server) GetTransportInfo(ctx context.Context, in *pb.GetTransportInfoRequest) (*pb.GetTransportInfoResponse, error) {
+	log.Printf("Получен запрос от пользователя на получение инфы о транспорте")
+
+	transport, err := db.GetTransportRequest(in)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "Ошибка при получении заявки: %v", err)
+	}
+
+	log.Printf("Заявка успешно получена")
+
+	return &pb.GetTransportInfoResponse{
+		Transports: transport,
+	}, nil
+}
 
 func Start() {
 	lis, err := net.Listen("tcp", ":50054")
