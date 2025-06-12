@@ -4,7 +4,7 @@ package proto;
 
 option go_package = "transport-management-service/proto;proto";
 
-service NotificationService {
+service TransportService {
   rpc CreateTransport (CreateTransportRequest) returns (CreateTransportResponse);
   rpc UpdateTransport (UpdateTransportRequest) returns (UpdateTransportResponse);
   rpc GetTransportInfo (GetTransportInfoRequest) returns (GetTransportInfoResponse);
