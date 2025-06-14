@@ -428,11 +428,10 @@ func (x *TransportInfo) GetCurrentDriverId() int32 {
 
 type CreateTransportLogRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	TransportId   int32                  `protobuf:"varint,2,opt,name=transport_id,json=transportId,proto3" json:"transport_id,omitempty"`
 	ServiceTypeId int32                  `protobuf:"varint,3,opt,name=service_type_id,json=serviceTypeId,proto3" json:"service_type_id,omitempty"`
 	ServiceDate   string                 `protobuf:"bytes,4,opt,name=service_date,json=serviceDate,proto3" json:"service_date,omitempty"`
-	Description   int32                  `protobuf:"varint,5,opt,name=description,proto3" json:"description,omitempty"`
+	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	Mileage       int32                  `protobuf:"varint,6,opt,name=mileage,proto3" json:"mileage,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -468,13 +467,6 @@ func (*CreateTransportLogRequest) Descriptor() ([]byte, []int) {
 	return file_proto_transport_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *CreateTransportLogRequest) GetId() int32 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
 func (x *CreateTransportLogRequest) GetTransportId() int32 {
 	if x != nil {
 		return x.TransportId
@@ -496,11 +488,11 @@ func (x *CreateTransportLogRequest) GetServiceDate() string {
 	return ""
 }
 
-func (x *CreateTransportLogRequest) GetDescription() int32 {
+func (x *CreateTransportLogRequest) GetDescription() string {
 	if x != nil {
 		return x.Description
 	}
-	return 0
+	return ""
 }
 
 func (x *CreateTransportLogRequest) GetMileage() int32 {
@@ -758,13 +750,12 @@ const file_proto_transport_proto_rawDesc = "" +
 	"\x06number\x18\x02 \x01(\tR\x06number\x12%\n" +
 	"\x0etransport_type\x18\x03 \x01(\tR\rtransportType\x12\x1b\n" +
 	"\tis_active\x18\x04 \x01(\x05R\bisActive\x12*\n" +
-	"\x11current_driver_id\x18\x05 \x01(\x05R\x0fcurrentDriverId\"\xd5\x01\n" +
-	"\x19CreateTransportLogRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x05R\x02id\x12!\n" +
+	"\x11current_driver_id\x18\x05 \x01(\x05R\x0fcurrentDriverId\"\xc5\x01\n" +
+	"\x19CreateTransportLogRequest\x12!\n" +
 	"\ftransport_id\x18\x02 \x01(\x05R\vtransportId\x12&\n" +
 	"\x0fservice_type_id\x18\x03 \x01(\x05R\rserviceTypeId\x12!\n" +
 	"\fservice_date\x18\x04 \x01(\tR\vserviceDate\x12 \n" +
-	"\vdescription\x18\x05 \x01(\x05R\vdescription\x12\x18\n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x18\n" +
 	"\amileage\x18\x06 \x01(\x05R\amileage\"6\n" +
 	"\x1aCreateTransportLogResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"\xc7\x01\n" +

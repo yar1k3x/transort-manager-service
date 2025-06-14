@@ -2,11 +2,11 @@ package server
 
 import (
 	"context"
+	"os"
 
 	// "fmt"
 	"log"
 	"net"
-	"os"
 
 	"TransportManagementService/db"
 	pb "TransportManagementService/proto"
@@ -112,6 +112,7 @@ func (s *server) GetTransportLogsInfo(ctx context.Context, in *pb.GetTransportLo
 
 func Start() {
 	jwt.JWTSecretKey = os.Getenv("JWT_SECRET_KEY")
+	//jwt.JWTSecretKey = "ZuxooEpNl7MgUUbnxGntsBvSxEnizlgsDfTvOBGamck"
 	lis, err := net.Listen("tcp", ":50054")
 	if err != nil {
 		log.Fatalf("не удалось запустить сервер: %v", err)
