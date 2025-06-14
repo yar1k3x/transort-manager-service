@@ -2,12 +2,18 @@ package server
 
 import (
 	"context"
+
 	// "fmt"
 	"log"
 	"net"
+	"os"
 
 	"TransportManagementService/db"
 	pb "TransportManagementService/proto"
+
+	grpc_auth "github.com/grpc-ecosystem/go-grpc-middleware/auth"
+	"github.com/yar1k3x/JWTValidation/jwt"
+	"github.com/yar1k3x/JWTValidation/middleware"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -105,12 +111,17 @@ func (s *server) GetTransportLogsInfo(ctx context.Context, in *pb.GetTransportLo
 }
 
 func Start() {
+	jwt.JWTSecretKey = os.Getenv("JWT_SECRET_KEY")
 	lis, err := net.Listen("tcp", ":50054")
 	if err != nil {
 		log.Fatalf("не удалось запустить сервер: %v", err)
 	}
 
-	s := grpc.NewServer()
+	s := grpc.NewServer(
+		grpc.ChainUnaryInterceptor(
+			grpc_auth.UnaryServerInterceptor(middleware.AuthMiddleware),
+		),
+	)
 
 	pb.RegisterTransportServiceServer(s, &server{}) // Регистрация gRPC-сервиса
 
