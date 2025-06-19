@@ -111,16 +111,31 @@ func (s *server) GetTransportLogsInfo(ctx context.Context, in *pb.GetTransportLo
 }
 
 func (s *server) GetTransportType(ctx context.Context, in *emptypb.Empty) (*pb.GetTransportTypeResponse, error) {
-	log.Printf("Получен запрос от пользователя на получения запросов")
+	log.Printf("Получен запрос от пользователя на получение типов транспортных средств")
 
 	types, err := db.GetTransportTypes()
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "ошибка получения данных из базы данных: %v", err)
 	}
 
-	log.Printf("Заявки успешно получены")
+	log.Printf("Транспортные типы успешно получены")
 
 	return &pb.GetTransportTypeResponse{
+		Types: types,
+	}, nil
+}
+
+func (s *server) GetServiceType(ctx context.Context, in *emptypb.Empty) (*pb.GetServiceTypeResponse, error) {
+	log.Printf("Получен запрос от пользователя на получения типов сервисных работ")
+
+	types, err := db.GetServiceTypes()
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "ошибка получения данных из базы данных: %v", err)
+	}
+
+	log.Printf("Типы сервисных работ успешно получены")
+
+	return &pb.GetServiceTypeResponse{
 		Types: types,
 	}, nil
 }

@@ -88,12 +88,12 @@ func GetTransportRequest(input *proto.GetTransportInfoRequest) ([]*proto.Transpo
 	baseQuery := `
 		SELECT
 			t.id,
+			t.transport_name,
 			t.number,
-			tt.name AS type_name,
+			t.type_id,
 			t.is_active,
 			t.current_driver_id
 		FROM transports t
-		JOIN transport_type tt ON t.type_id = tt.id
 
     `
 
@@ -135,8 +135,9 @@ func GetTransportRequest(input *proto.GetTransportInfoRequest) ([]*proto.Transpo
 
 		err := rows.Scan(
 			&r.TransportId,
+			&r.TransportName,
 			&r.Number,
-			&r.TransportType,
+			&r.TransportTypeId,
 			&r.IsActive,
 			&r.CurrentDriverId,
 			//&createdAt,
@@ -266,6 +267,42 @@ func GetTransportTypes() ([]*proto.TransportType, error) {
 
 	for rows.Next() {
 		var r proto.TransportType
+
+		err := rows.Scan(
+			&r.Id,
+			&r.TypeName,
+		)
+		if err != nil {
+			return nil, err
+		}
+
+		types = append(types, &r)
+	}
+
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return types, nil
+}
+
+func GetServiceTypes() ([]*proto.ServiceType, error) {
+	baseQuery := `
+        SELECT 
+            id, type_name
+        FROM service_type
+    `
+
+	rows, err := DB.Query(baseQuery)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var types []*proto.ServiceType
+
+	for rows.Next() {
+		var r proto.ServiceType
 
 		err := rows.Scan(
 			&r.Id,
