@@ -189,12 +189,11 @@ func GetTransportLogsRequest(input *proto.GetTransportLogsInfoRequest) ([]*proto
 		SELECT
 			tl.id,
 			tl.transport_id,
-			st.name AS service_type,
+			tl.service_type_id,
 			tl.description,
 			tl.mileage,
 			tl.service_date
 		FROM transport_logs tl
-		JOIN service_type st ON tl.service_type_id = st.id
     `
 
 	var args []interface{}
@@ -227,7 +226,7 @@ func GetTransportLogsRequest(input *proto.GetTransportLogsInfoRequest) ([]*proto
 		err := rows.Scan(
 			&r.Id,
 			&r.TransportId,
-			&r.ServiceType,
+			&r.ServiceTypeId,
 			&r.Description,
 			&r.Mileage,
 			&serviceDate,
