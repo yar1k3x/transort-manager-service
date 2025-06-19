@@ -2,7 +2,6 @@ package server
 
 import (
 	"context"
-	"os"
 
 	// "fmt"
 	"log"
@@ -19,6 +18,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/reflection"
 	"google.golang.org/grpc/status"
+	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 type server struct {
@@ -110,9 +110,24 @@ func (s *server) GetTransportLogsInfo(ctx context.Context, in *pb.GetTransportLo
 	}, nil
 }
 
+func (s *server) GetTransportType(ctx context.Context, in *emptypb.Empty) (*pb.GetTransportTypeResponse, error) {
+	log.Printf("Получен запрос от пользователя на получения запросов")
+
+	types, err := db.GetTransportTypes()
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "ошибка получения данных из базы данных: %v", err)
+	}
+
+	log.Printf("Заявки успешно получены")
+
+	return &pb.GetTransportTypeResponse{
+		Types: types,
+	}, nil
+}
+
 func Start() {
-	jwt.JWTSecretKey = os.Getenv("JWT_SECRET_KEY")
-	//jwt.JWTSecretKey = "ZuxooEpNl7MgUUbnxGntsBvSxEnizlgsDfTvOBGamck"
+	//jwt.JWTSecretKey = os.Getenv("JWT_SECRET_KEY")
+	jwt.JWTSecretKey = "ZuxooEpNl7MgUUbnxGntsBvSxEnizlgsDfTvOBGamck"
 	lis, err := net.Listen("tcp", ":50054")
 	if err != nil {
 		log.Fatalf("не удалось запустить сервер: %v", err)

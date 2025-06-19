@@ -5,13 +5,15 @@ package proto;
 option go_package = "TransportManagementService/proto;proto";
 
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
 
 service TransportService {
-  rpc CreateTransport (CreateTransportRequest) returns (CreateTransportResponse);
-  rpc UpdateTransport (UpdateTransportRequest) returns (UpdateTransportResponse);
-  rpc GetTransportInfo (GetTransportInfoRequest) returns (GetTransportInfoResponse);
-  rpc CreateTransportLog (CreateTransportLogRequest) returns (CreateTransportLogResponse);
-  rpc GetTransportLogsInfo (GetTransportLogsInfoRequest) returns (GetTransportLogsInfoResponse);
+  rpc CreateTransport(CreateTransportRequest) returns (CreateTransportResponse);
+  rpc UpdateTransport(UpdateTransportRequest) returns (UpdateTransportResponse);
+  rpc GetTransportInfo(GetTransportInfoRequest) returns (GetTransportInfoResponse);
+  rpc CreateTransportLog(CreateTransportLogRequest) returns (CreateTransportLogResponse);
+  rpc GetTransportLogsInfo(GetTransportLogsInfoRequest) returns (GetTransportLogsInfoResponse);
+  rpc GetTransportType(google.protobuf.Empty) returns (GetTransportTypeResponse);
 }
 
 message CreateTransportRequest {
@@ -81,4 +83,15 @@ message GetTransportLogsInfoRequest {
 
 message GetTransportLogsInfoResponse {
   repeated TransportLogInfo transport_logs = 1;
+}
+
+message GetTransportTypeRequest {}
+
+message TransportType {
+  int32 id = 1;
+  string type_name = 2;
+}
+
+message GetTransportTypeResponse{
+  repeated TransportType types = 1;
 }

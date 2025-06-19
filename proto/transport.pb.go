@@ -9,6 +9,7 @@ package proto
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
@@ -718,11 +719,143 @@ func (x *GetTransportLogsInfoResponse) GetTransportLogs() []*TransportLogInfo {
 	return nil
 }
 
+type GetTransportTypeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTransportTypeRequest) Reset() {
+	*x = GetTransportTypeRequest{}
+	mi := &file_proto_transport_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTransportTypeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTransportTypeRequest) ProtoMessage() {}
+
+func (x *GetTransportTypeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_transport_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTransportTypeRequest.ProtoReflect.Descriptor instead.
+func (*GetTransportTypeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_transport_proto_rawDescGZIP(), []int{12}
+}
+
+type TransportType struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	TypeName      string                 `protobuf:"bytes,2,opt,name=type_name,json=typeName,proto3" json:"type_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransportType) Reset() {
+	*x = TransportType{}
+	mi := &file_proto_transport_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransportType) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransportType) ProtoMessage() {}
+
+func (x *TransportType) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_transport_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransportType.ProtoReflect.Descriptor instead.
+func (*TransportType) Descriptor() ([]byte, []int) {
+	return file_proto_transport_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *TransportType) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *TransportType) GetTypeName() string {
+	if x != nil {
+		return x.TypeName
+	}
+	return ""
+}
+
+type GetTransportTypeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Types         []*TransportType       `protobuf:"bytes,1,rep,name=types,proto3" json:"types,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTransportTypeResponse) Reset() {
+	*x = GetTransportTypeResponse{}
+	mi := &file_proto_transport_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTransportTypeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTransportTypeResponse) ProtoMessage() {}
+
+func (x *GetTransportTypeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_transport_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTransportTypeResponse.ProtoReflect.Descriptor instead.
+func (*GetTransportTypeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_transport_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *GetTransportTypeResponse) GetTypes() []*TransportType {
+	if x != nil {
+		return x.Types
+	}
+	return nil
+}
+
 var File_proto_transport_proto protoreflect.FileDescriptor
 
 const file_proto_transport_proto_rawDesc = "" +
 	"\n" +
-	"\x15proto/transport.proto\x12\x05proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x92\x01\n" +
+	"\x15proto/transport.proto\x12\x05proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/protobuf/empty.proto\"\x92\x01\n" +
 	"\x16CreateTransportRequest\x12\x16\n" +
 	"\x06number\x18\x01 \x01(\tR\x06number\x12\x17\n" +
 	"\atype_id\x18\x02 \x01(\x05R\x06typeId\x12\x1b\n" +
@@ -769,13 +902,20 @@ const file_proto_transport_proto_rawDesc = "" +
 	"\x1bGetTransportLogsInfoRequest\x12>\n" +
 	"\ftransport_id\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\vtransportId\"^\n" +
 	"\x1cGetTransportLogsInfoResponse\x12>\n" +
-	"\x0etransport_logs\x18\x01 \x03(\v2\x17.proto.TransportLogInfoR\rtransportLogs2\xc7\x03\n" +
+	"\x0etransport_logs\x18\x01 \x03(\v2\x17.proto.TransportLogInfoR\rtransportLogs\"\x19\n" +
+	"\x17GetTransportTypeRequest\"<\n" +
+	"\rTransportType\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x1b\n" +
+	"\ttype_name\x18\x02 \x01(\tR\btypeName\"F\n" +
+	"\x18GetTransportTypeResponse\x12*\n" +
+	"\x05types\x18\x01 \x03(\v2\x14.proto.TransportTypeR\x05types2\x94\x04\n" +
 	"\x10TransportService\x12P\n" +
 	"\x0fCreateTransport\x12\x1d.proto.CreateTransportRequest\x1a\x1e.proto.CreateTransportResponse\x12P\n" +
 	"\x0fUpdateTransport\x12\x1d.proto.UpdateTransportRequest\x1a\x1e.proto.UpdateTransportResponse\x12S\n" +
 	"\x10GetTransportInfo\x12\x1e.proto.GetTransportInfoRequest\x1a\x1f.proto.GetTransportInfoResponse\x12Y\n" +
 	"\x12CreateTransportLog\x12 .proto.CreateTransportLogRequest\x1a!.proto.CreateTransportLogResponse\x12_\n" +
-	"\x14GetTransportLogsInfo\x12\".proto.GetTransportLogsInfoRequest\x1a#.proto.GetTransportLogsInfoResponseB(Z&TransportManagementService/proto;protob\x06proto3"
+	"\x14GetTransportLogsInfo\x12\".proto.GetTransportLogsInfoRequest\x1a#.proto.GetTransportLogsInfoResponse\x12K\n" +
+	"\x10GetTransportType\x12\x16.google.protobuf.Empty\x1a\x1f.proto.GetTransportTypeResponseB(Z&TransportManagementService/proto;protob\x06proto3"
 
 var (
 	file_proto_transport_proto_rawDescOnce sync.Once
@@ -789,7 +929,7 @@ func file_proto_transport_proto_rawDescGZIP() []byte {
 	return file_proto_transport_proto_rawDescData
 }
 
-var file_proto_transport_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_proto_transport_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_proto_transport_proto_goTypes = []any{
 	(*CreateTransportRequest)(nil),       // 0: proto.CreateTransportRequest
 	(*CreateTransportResponse)(nil),      // 1: proto.CreateTransportResponse
@@ -803,33 +943,40 @@ var file_proto_transport_proto_goTypes = []any{
 	(*TransportLogInfo)(nil),             // 9: proto.TransportLogInfo
 	(*GetTransportLogsInfoRequest)(nil),  // 10: proto.GetTransportLogsInfoRequest
 	(*GetTransportLogsInfoResponse)(nil), // 11: proto.GetTransportLogsInfoResponse
-	(*wrapperspb.Int32Value)(nil),        // 12: google.protobuf.Int32Value
+	(*GetTransportTypeRequest)(nil),      // 12: proto.GetTransportTypeRequest
+	(*TransportType)(nil),                // 13: proto.TransportType
+	(*GetTransportTypeResponse)(nil),     // 14: proto.GetTransportTypeResponse
+	(*wrapperspb.Int32Value)(nil),        // 15: google.protobuf.Int32Value
+	(*emptypb.Empty)(nil),                // 16: google.protobuf.Empty
 }
 var file_proto_transport_proto_depIdxs = []int32{
-	12, // 0: proto.UpdateTransportRequest.transport_id:type_name -> google.protobuf.Int32Value
-	12, // 1: proto.UpdateTransportRequest.is_active:type_name -> google.protobuf.Int32Value
-	12, // 2: proto.UpdateTransportRequest.current_driver_id:type_name -> google.protobuf.Int32Value
-	12, // 3: proto.GetTransportInfoRequest.transport_id:type_name -> google.protobuf.Int32Value
-	12, // 4: proto.GetTransportInfoRequest.is_active:type_name -> google.protobuf.Int32Value
-	12, // 5: proto.GetTransportInfoRequest.current_driver_id:type_name -> google.protobuf.Int32Value
+	15, // 0: proto.UpdateTransportRequest.transport_id:type_name -> google.protobuf.Int32Value
+	15, // 1: proto.UpdateTransportRequest.is_active:type_name -> google.protobuf.Int32Value
+	15, // 2: proto.UpdateTransportRequest.current_driver_id:type_name -> google.protobuf.Int32Value
+	15, // 3: proto.GetTransportInfoRequest.transport_id:type_name -> google.protobuf.Int32Value
+	15, // 4: proto.GetTransportInfoRequest.is_active:type_name -> google.protobuf.Int32Value
+	15, // 5: proto.GetTransportInfoRequest.current_driver_id:type_name -> google.protobuf.Int32Value
 	6,  // 6: proto.GetTransportInfoResponse.transports:type_name -> proto.TransportInfo
-	12, // 7: proto.GetTransportLogsInfoRequest.transport_id:type_name -> google.protobuf.Int32Value
+	15, // 7: proto.GetTransportLogsInfoRequest.transport_id:type_name -> google.protobuf.Int32Value
 	9,  // 8: proto.GetTransportLogsInfoResponse.transport_logs:type_name -> proto.TransportLogInfo
-	0,  // 9: proto.TransportService.CreateTransport:input_type -> proto.CreateTransportRequest
-	2,  // 10: proto.TransportService.UpdateTransport:input_type -> proto.UpdateTransportRequest
-	4,  // 11: proto.TransportService.GetTransportInfo:input_type -> proto.GetTransportInfoRequest
-	7,  // 12: proto.TransportService.CreateTransportLog:input_type -> proto.CreateTransportLogRequest
-	10, // 13: proto.TransportService.GetTransportLogsInfo:input_type -> proto.GetTransportLogsInfoRequest
-	1,  // 14: proto.TransportService.CreateTransport:output_type -> proto.CreateTransportResponse
-	3,  // 15: proto.TransportService.UpdateTransport:output_type -> proto.UpdateTransportResponse
-	5,  // 16: proto.TransportService.GetTransportInfo:output_type -> proto.GetTransportInfoResponse
-	8,  // 17: proto.TransportService.CreateTransportLog:output_type -> proto.CreateTransportLogResponse
-	11, // 18: proto.TransportService.GetTransportLogsInfo:output_type -> proto.GetTransportLogsInfoResponse
-	14, // [14:19] is the sub-list for method output_type
-	9,  // [9:14] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	13, // 9: proto.GetTransportTypeResponse.types:type_name -> proto.TransportType
+	0,  // 10: proto.TransportService.CreateTransport:input_type -> proto.CreateTransportRequest
+	2,  // 11: proto.TransportService.UpdateTransport:input_type -> proto.UpdateTransportRequest
+	4,  // 12: proto.TransportService.GetTransportInfo:input_type -> proto.GetTransportInfoRequest
+	7,  // 13: proto.TransportService.CreateTransportLog:input_type -> proto.CreateTransportLogRequest
+	10, // 14: proto.TransportService.GetTransportLogsInfo:input_type -> proto.GetTransportLogsInfoRequest
+	16, // 15: proto.TransportService.GetTransportType:input_type -> google.protobuf.Empty
+	1,  // 16: proto.TransportService.CreateTransport:output_type -> proto.CreateTransportResponse
+	3,  // 17: proto.TransportService.UpdateTransport:output_type -> proto.UpdateTransportResponse
+	5,  // 18: proto.TransportService.GetTransportInfo:output_type -> proto.GetTransportInfoResponse
+	8,  // 19: proto.TransportService.CreateTransportLog:output_type -> proto.CreateTransportLogResponse
+	11, // 20: proto.TransportService.GetTransportLogsInfo:output_type -> proto.GetTransportLogsInfoResponse
+	14, // 21: proto.TransportService.GetTransportType:output_type -> proto.GetTransportTypeResponse
+	16, // [16:22] is the sub-list for method output_type
+	10, // [10:16] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_proto_transport_proto_init() }
@@ -843,7 +990,7 @@ func file_proto_transport_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_transport_proto_rawDesc), len(file_proto_transport_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

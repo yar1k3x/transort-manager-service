@@ -248,3 +248,39 @@ func GetTransportLogsRequest(input *proto.GetTransportLogsInfoRequest) ([]*proto
 
 	return transportLogs, nil
 }
+
+func GetTransportTypes() ([]*proto.TransportType, error) {
+	baseQuery := `
+        SELECT 
+            id, type_name
+        FROM transport_type
+    `
+
+	rows, err := DB.Query(baseQuery)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var types []*proto.TransportType
+
+	for rows.Next() {
+		var r proto.TransportType
+
+		err := rows.Scan(
+			&r.Id,
+			&r.TypeName,
+		)
+		if err != nil {
+			return nil, err
+		}
+
+		types = append(types, &r)
+	}
+
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return types, nil
+}
