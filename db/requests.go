@@ -10,8 +10,8 @@ import (
 func CreateTransportRequest(input *proto.CreateTransportRequest) (int64, error) {
 	stmt, err := DB.Prepare(`
         INSERT INTO transports (
-            transport_name, number, type_id, is_active, current_driver_id
-        ) VALUES (?, ?, ?, ?, ?)
+            transport_name, number, type_id, is_active, current_driver_id, image_url
+        ) VALUES (?, ?, ?, ?, ?, ?)
     `)
 	if err != nil {
 		return 0, err
@@ -24,6 +24,7 @@ func CreateTransportRequest(input *proto.CreateTransportRequest) (int64, error) 
 		input.TypeId,
 		input.IsActive,
 		input.CurrentDriverId,
+		input.ImageUrl,
 	)
 	if err != nil {
 		return 0, err
@@ -93,7 +94,8 @@ func GetTransportRequest(input *proto.GetTransportInfoRequest) ([]*proto.Transpo
 			t.number,
 			t.type_id,
 			t.is_active,
-			t.current_driver_id
+			t.current_driver_id,
+			t.image_url
 		FROM transports t
 
     `
@@ -141,6 +143,7 @@ func GetTransportRequest(input *proto.GetTransportInfoRequest) ([]*proto.Transpo
 			&r.TransportTypeId,
 			&r.IsActive,
 			&r.CurrentDriverId,
+			&r.ImageUrl,
 			//&createdAt,
 		)
 		if err != nil {
