@@ -10,8 +10,8 @@ import (
 func CreateTransportRequest(input *proto.CreateTransportRequest) (int64, error) {
 	stmt, err := DB.Prepare(`
         INSERT INTO transports (
-            number, type_id, is_active, current_driver_id
-        ) VALUES (?, ?, ?, ?)
+            transport_name, number, type_id, is_active, current_driver_id
+        ) VALUES (?, ?, ?, ?, ?)
     `)
 	if err != nil {
 		return 0, err
@@ -19,6 +19,7 @@ func CreateTransportRequest(input *proto.CreateTransportRequest) (int64, error) 
 	defer stmt.Close()
 
 	res, err := stmt.Exec(
+		input.TransportName,
 		input.Number,
 		input.TypeId,
 		input.IsActive,
