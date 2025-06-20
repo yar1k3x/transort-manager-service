@@ -55,6 +55,10 @@ func UpdateTransportRequest(input *proto.UpdateTransportRequest) (bool, error) {
 		fields = append(fields, "is_active = ?")
 		args = append(args, input.IsActive.Value)
 	}
+	if input.ImageUrl != nil {
+		fields = append(fields, "image_url = ?")
+		args = append(args, input.ImageUrl.Value)
+	}
 
 	if len(fields) == 0 {
 		return false, fmt.Errorf("no fields to update")
